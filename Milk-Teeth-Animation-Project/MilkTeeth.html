@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Млечни зъби</title>
+	<link rel="stylesheet" type="text/css" href="MilkTeeth 2.css">
+	<script src="suica.min.js"></script>
+
+	<script>
+		function main(){
+			p = new Suica();
+			background([0.7,0.3,0.3]);
+			p.nextFrame = Animate;
+			lookAt([0,0,500],[0,0,0],[1,0,0]);
+			
+			p.gl.canvas.addEventListener('mousedown',mouseDown,false);
+			p.gl.canvas.addEventListener('mousemove',mouseMove,false);
+			p.gl.canvas.addEventListener('contextmenu',function(e){e.preventDefault();},false);
+
+			//orthographic(-10,10);
+			lookAt([100,0,0],[0,0,0],[0,0,1]);
+			
+			//demo();
+			alpha = radians(0);
+			
+			zub = group([
+				sphere([0,-1.5,0],1.5).custom({color:[1,1,1],interactive:true}),
+				cylinder([0,-1.5,0],1.5,3).custom({color:[1,1,1],interactive:true}),
+			]);
+			
+			zub1 = group([
+				sphere([0,1.5,0],1.5).custom({color:[1,1,1],interactive:true}),
+				cylinder([0,1.5,0],1.5,3).custom({color:[1,1,1],interactive:true}),
+			]);
+			
+			
+			zub2 = group([
+				sphere([-1.5,-4,0],1.5).custom({color:[1,1,1],interactive:true}),
+				cylinder([-1.5,-4,0],1.5,3).custom({color:[1,1,1],interactive:true}),
+			]);
+			
+			zub3 = group([
+				sphere([-1.5,4,0],1.5).custom({color:[1,1,1],interactive:true}),
+				cylinder([-1.5,4,0],1.5,3).custom({color:[1,1,1],interactive:true}),
+			]);
+			
+			zub4 = group([
+				sphere([-4,-5.5,0],1.6).custom({color:[1,1,1],interactive:true}),
+				cone([-4,-5.5,0],1.6,4.5).custom({color:[1,1,1],interactive:true}),
+					
+			]);
+			zub5 = group([
+				sphere([-4,5.5,0],1.6).custom({color:[1,1,1],interactive:true}),
+				cone([-4,5.5,0],1.6,4.5).custom({color:[1,1,1],interactive:true}),
+					
+			]);
+			
+			zub6 = group([
+				sphere([-7,5.5,0],1.7).custom({color:[1,1,1],interactive:true}),
+				cylinder([-7,5.5,0],1.7,3).custom({color:[1,1,1],interactive:true}),
+				sphere([-7.7,5.5,0],1.7).custom({color:[1,1,1],interactive:true}),
+				cylinder([-7.7,5.5,0],1.7,3).custom({color:[1,1,1],interactive:true}),
+			]);
+			
+			zub7 = group([
+				sphere([-7,-5.5,0],1.7).custom({color:[1,1,1],interactive:true}),
+				cylinder([-7,-5.5,0],1.7,3).custom({color:[1,1,1],interactive:true}),
+				sphere([-7.7,-5.5,0],1.7).custom({color:[1,1,1],interactive:true}),
+				cylinder([-7.7,-5.5,0],1.7,3).custom({color:[1,1,1],interactive:true}),
+			]);
+			
+			zub8 = group([
+				sphere([-11,5.5,0],1.7).custom({color:[1,1,1],interactive:true}),
+				cylinder([-11,5.5,0],1.7,3).custom({color:[1,1,1],interactive:true}),
+				sphere([-11.7,5.5,0],1.7).custom({color:[1,1,1],interactive:true}),
+				cylinder([-11.7,5.5,0],1.7,3).custom({color:[1,1,1],interactive:true}),
+			]);
+			
+			zub9 = group([
+				sphere([-11,-5.5,0],1.7).custom({color:[1,1,1],interactive:true}),
+				cylinder([-11,-5.5,0],1.7,3).custom({color:[1,1,1],interactive:true}),
+				sphere([-11.7,-5.5,0],1.7).custom({color:[1,1,1],interactive:true}),
+				cylinder([-11.7,-5.5,0],1.7,3).custom({color:[1,1,1],interactive:true}),
+			]);
+			//lookAt([0,-1.5,0.1],[0,0,0]);
+			
+			zub10 = group([
+				sphere([0,-1.5,15],1.5).custom({color:[1,1,1],interactive:true}),
+				cylinder([0,-1.5,15-3],1.5,3).custom({color:[1,1,1],interactive:true}),
+			]);
+			
+			zub11 = group([
+				sphere([0,1.5,15],1.5).custom({color:[1,1,1],interactive:true}),
+				cylinder([0,1.5,15-3],1.5,3).custom({color:[1,1,1],interactive:true}),
+			]);
+			
+			zub12 = group([
+				sphere([-1.5,-4,15],1.5).custom({color:[1,1,1],interactive:true}),
+				cylinder([-1.5,-4,15-3],1.5,3).custom({color:[1,1,1],interactive:true}),
+			]);
+			
+			zub13 = group([
+				sphere([-1.5,4,15],1.5).custom({color:[1,1,1],interactive:true}),
+				cylinder([-1.5,4,15-3],1.5,3).custom({color:[1,1,1],interactive:true}),
+			]);
+			
+			zub14 = group([
+				sphere([-4,-5.5,15],1.6).custom({color:[1,1,1],interactive:true}),
+				cone([-4,-5.5,15],1.6,-4.5).custom({color:[1,1,1],interactive:true}),
+					
+			]);
+			zub15 = group([
+				sphere([-4,5.5,15],1.6).custom({color:[1,1,1],interactive:true}),
+				cone([-4,5.5,15],1.6,-5.5).custom({color:[1,1,1],interactive:true}),
+					
+			]);
+			
+			zub16 = group([
+				sphere([-7,5.5,15],1.7).custom({color:[1,1,1],interactive:true}),
+				cylinder([-7,5.5,15-3],1.7,3).custom({color:[1,1,1],interactive:true}),
+				sphere([-7.7,5.5,15],1.7).custom({color:[1,1,1],interactive:true}),
+				cylinder([-7.7,5.5,15-3],1.7,3).custom({color:[1,1,1],interactive:true}),
+			]);
+			
+			zub17 = group([
+				sphere([-7,-5.5,15],1.7).custom({color:[1,1,1],interactive:true}),
+				cylinder([-7,-5.5,15-3],1.7,3).custom({color:[1,1,1],interactive:true}),
+				sphere([-7.7,-5.5,15],1.7).custom({color:[1,1,1],interactive:true}),
+				cylinder([-7.7,-5.5,15-3],1.7,3).custom({color:[1,1,1],interactive:true}),
+			]);
+			
+			zub18 = group([
+				sphere([-11,5.5,15],1.7).custom({color:[1,1,1],interactive:true}),
+				cylinder([-11,5.5,15-3],1.7,3).custom({color:[1,1,1],interactive:true}),
+				sphere([-11.7,5.5,15],1.7).custom({color:[1,1,1],interactive:true}),
+				cylinder([-11.7,5.5,15-3],1.7,3).custom({color:[1,1,1],interactive:true}),
+			]);
+			
+			zub19 = group([
+				sphere([-11,-5.5,15],1.7).custom({color:[1,1,1],interactive:true}),
+				cylinder([-11,-5.5,15-3],1.7,3).custom({color:[1,1,1],interactive:true}),
+				sphere([-11.7,-5.5,15],1.7).custom({color:[1,1,1],interactive:true}),
+				cylinder([-11.7,-5.5,15-3],1.7,3).custom({color:[1,1,1],interactive:true}),	
+			]);
+			
+			//p.nextFrame = animateFirstTwoFrontTeeth;
+			//p.nextFrame = fallingFirstFrontTeeth;
+			LowerCentralIncisors = false;
+			UpperCentralIncisors = false;
+			UpperLateralIncisors = false;
+			LowerLateralIncisors = false;
+			UpperFirstMolars = false;
+			LowerFirstMolars = false;
+			UpperCanines = false;
+			LowerCanines = false;
+			LowerSecondMolars = false;
+			UpperSecondMolars = false;
+			
+			fallingLowerCentralIncisors = false;
+			fallingUpperCentralIncisors = false;
+			fallingUpperLateralIncisors = false;
+			fallingLowerLateralIncisors = false;
+			fallingUpperFirstMolars = false;
+			fallingLowerFirstMolars = false;
+			fallingUpperCanines = false;
+			fallingLowerCanines = false;
+			fallingLowerSecondMolars = false;
+			fallingUpperSecondMolars = false;
+
+			
+		}
+		A = 0;
+		B = 0;
+		D = 200;
+		
+		function mouseDown(event)
+		{
+			x = event.clientX;
+			y = event.clientY;
+		}
+		
+		function mouseMove(event)
+		{
+			if (event.buttons==1)
+			{
+				A -= (event.clientX-x)/150;
+				B += (event.clientY-y)/150;
+				if (B>+1.5) B=+1.5;
+				if (B<-1.5) B=-1.5;
+			}
+
+			if (event.buttons==2)
+			{
+				D *= Math.pow(1.01,event.clientY-y);
+				if (D<10) D=10;
+				if (D>1000) D=1000;
+			}
+
+			lookAt ( [0.5*D*Math.cos(A)*Math.cos(B),
+					  0.5*D*Math.sin(A)*Math.cos(B),
+					  0.5*D*Math.sin(B)], [0,0,0], [0,0,1]);
+			x = event.clientX;
+			y = event.clientY;
+		}
+		/*a=radians(random(0,360));
+				k=radians(1);
+				s.center=[xc+r*Math.cos(a), yc+r*Math.sin(a),zc];
+				a+=k;*/
+		
+
+		function Animate()
+		{
+		///LowerCentralIncisors	- Долни Централни Резци
+			if(LowerCentralIncisors== true){
+				t = 4*Suica.time;
+				ang = radians(70-10*Math.sin(t));
+				zub.focus = [Math.cos(ang),0,Math.sin(ang)];
+				zub1.focus = [Math.cos(ang),0,Math.sin(ang)];
+			} 
+
+			if(fallingLowerCentralIncisors== true){
+				LowerCentralIncisors = false;
+				zub.center[2] -= 10*Suica.dTime;
+				zub1.center[2] -= 10*Suica.dTime;
+			}
+		///UpperCentralIncisors	- Горни централни резци
+
+			if(UpperCentralIncisors == true){
+				t = 4*Suica.time;
+				a = radians(90-5*Math.sin(t));
+				zub10.focus = [Math.cos(a),0,Math.sin(a)];
+				zub11.focus = [Math.cos(a),0,Math.sin(a)];
+			}
+
+			if(fallingUpperCentralIncisors == true){
+				UpperCentralIncisors = false;
+				zub10.center[2] -= 10*Suica.dTime;
+				zub11.center[2] -= 10*Suica.dTime;
+			}
+		///UpperLateralIncisors - Горни крайни резци
+			if(UpperLateralIncisors == true){
+				t = 4*Suica.time;
+				ang = radians(100-5*Math.sin(t));
+				zub12.focus = [Math.cos(ang),0,Math.sin(ang)];
+				zub13.focus = [Math.cos(ang),0,Math.sin(ang)];
+			}
+
+			if(fallingUpperLateralIncisors == true){
+				UpperLateralIncisors = false;
+				zub12.center[2] -= 10 * Suica.dTime;
+				zub13.center[2] -= 10 * Suica.dTime;
+			}
+		///LowerLateralIncisors	- долни крайни резци	
+			if(LowerLateralIncisors== true){
+				t = 4*Suica.time;
+				ang = radians(80-10*Math.sin(t));
+				zub2.focus = [Math.cos(ang),0,Math.sin(ang)];
+				zub3.focus = [Math.cos(ang),0,Math.sin(ang)];
+			}
+
+			if(fallingLowerLateralIncisors == true){
+				LowerLateralIncisors = false;
+				zub2.center[2] -= 10*Suica.dTime;
+				zub3.center[2] -= 10*Suica.dTime;
+			}
+		//UpperFirstMolars - Горни първи дъвкателни !!!ГРЕШКА
+			if(UpperFirstMolars== true){
+				t = 4*Suica.time;
+				ang = radians(85-2*Math.sin(t));
+				zub16.focus = [Math.cos(ang),0,Math.sin(ang)];
+				zub17.focus = [Math.cos(ang),0,Math.sin(ang)];
+			}
+
+			if(fallingUpperFirstMolars == true){
+				UpperFirstMolars = false;
+				zub16.center[2] -= 10*Suica.dTime;
+				zub17.center[2] -= 10*Suica.dTime;
+			}
+		//LowerFirstMolars - Долви първи дъвкателни
+			if(LowerFirstMolars== true){
+				t = 4*Suica.time;
+				ang = radians(85-5*Math.sin(t));
+				zub6.focus = [Math.cos(ang),0,Math.sin(ang)];
+				zub7.focus = [Math.cos(ang),0,Math.sin(ang)];
+			}
+
+			if(fallingLowerFirstMolars == true){
+				LowerFirstMolars = false;
+				zub6.center[2] -= 10*Suica.dTime;
+				zub7.center[2] -= 10*Suica.dTime;
+			}
+		//UpperCanines	- Горни кучешки
+			if(UpperCanines== true){
+				t = 4*Suica.time;
+				ang = radians(85-3*Math.sin(t));
+				zub14.focus = [Math.cos(ang),0,Math.sin(ang)];
+				zub15.focus = [Math.cos(ang),0,Math.sin(ang)];
+			}
+
+			if(fallingUpperCanines == true){
+				UpperCanines = false;
+				zub14.center[2] -= 10*Suica.dTime;
+				zub15.center[2] -= 10*Suica.dTime;
+			}
+		////LowerCanines	 - Долни кучешки
+			if(LowerCanines== true){
+				t = 4*Suica.time;
+				ang = radians(70-5*Math.sin(t));
+				zub4.focus = [Math.cos(ang),0,Math.sin(ang)];
+				zub5.focus = [Math.cos(ang),0,Math.sin(ang)];
+			}
+
+			if(fallingLowerCanines == true){
+				LowerCanines = false;
+				zub4.center[2] -= 10*Suica.dTime;
+				zub5.center[2] -= 10*Suica.dTime;
+			}
+		//LowerSecondMolars	- долни втори дъвкателни
+			if(LowerSecondMolars == true){
+				t = 4*Suica.time;
+				ang = radians(85-5*Math.sin(t));
+				zub8.focus = [Math.cos(ang),0,Math.sin(ang)];
+				zub9.focus = [Math.cos(ang),0,Math.sin(ang)];
+			}
+
+			if(fallingLowerSecondMolars == true){
+				LowerSecondMolars = false;
+				zub8.center[2] -= 10*Suica.dTime;
+				zub9.center[2] -= 10*Suica.dTime;
+			}
+		//UpperSecondMolars - горни втори дъвкателни
+			if(UpperSecondMolars == true){
+				t = 4*Suica.time;
+				ang = radians(85-5*Math.sin(t));
+				zub18.focus = [Math.cos(ang),0,Math.sin(ang)];
+				zub19.focus = [Math.cos(ang),0,Math.sin(ang)];
+			}
+
+			if(fallingUpperSecondMolars== true){
+				UpperSecondMolars = false;
+				zub18.center[2] -= 10*Suica.dTime;
+				zub19.center[2] -= 10*Suica.dTime;
+			}
+		}
+		
+		
+		
+		///НАЧАЛО НА БУТОНИ
+		///LowerCentralIncisors	- Долни Централни Резци
+
+		function BLCI(){
+			LowerCentralIncisors = !LowerCentralIncisors;
+		}
+		
+		function BFLCI(){
+			fallingLowerCentralIncisors = !fallingLowerCentralIncisors;
+		}
+		
+		///UpperCentralIncisors	- Горни централни резци
+
+		function buttonUpperCentralIncisors(){
+			UpperCentralIncisors = !UpperCentralIncisors;
+		}
+		
+		function buttonFallingUCI(){
+			fallingUpperCentralIncisors = !fallingUpperCentralIncisors;
+		}
+		
+		///UpperLateralIncisors - Горни крайни резци
+
+		function buttonUpperLateralIncisors(){
+			UpperLateralIncisors = !UpperLateralIncisors;
+		}
+		
+		function buttonFallingULI(){
+			fallingUpperLateralIncisors = !fallingUpperLateralIncisors;
+		}
+		
+		///LowerLateralIncisors	- долни крайни резци
+		function buttonLowerLateralIncisors(){
+			LowerLateralIncisors = !LowerLateralIncisors;
+		}
+		
+		function buttonFallingLLI(){
+			fallingLowerLateralIncisors = !fallingLowerLateralIncisors;
+		}
+		
+		//UpperFirstMolars - Горни първи дъвкателни
+		function buttonUpperFirstMolars(){
+			UpperFirstMolars = !UpperFirstMolars;
+		}
+		
+		function buttonFallingUFM(){
+			fallingUpperFirstMolars = !fallingUpperFirstMolars;
+		}
+		//LowerFirstMolars - Долви първи дъвкателни
+		function buttonLowerFirstMolars(){
+			LowerFirstMolars = !LowerFirstMolars;
+		}
+		
+		function buttonFallingLFM(){
+			fallingLowerFirstMolars = !fallingLowerFirstMolars;
+		}
+		//UpperCanines	 - Горни кучешки
+		function buttonUpperCanines(){
+			UpperCanines = !UpperCanines;
+		}
+		
+		function buttonFallingUC(){
+			fallingUpperCanines = !fallingUpperCanines;
+		}
+		//LowerCanines	 - Долни кучешки
+		function buttonLowerCanines(){
+			LowerCanines = !LowerCanines;
+		}
+		
+		function buttonFallingLC(){
+			fallingLowerCanines = !fallingLowerCanines;
+		}
+		//LowerSecondMolars	- долни втори дъвкателни
+		function buttonLowerSecondMolars(){
+			LowerSecondMolars = !LowerSecondMolars;
+		}
+		
+		function buttonFallingLSM(){
+			fallingLowerSecondMolars = !fallingLowerSecondMolars;
+		}
+		//UpperSecondMolars - горни втори дъвкателни
+		function buttonUpperSecondMolars(){
+			UpperSecondMolars = !UpperSecondMolars;
+		}
+		
+		function buttonFallingUSM(){
+			fallingUpperSecondMolars = !fallingUpperSecondMolars;
+		}
+		
+	</script>	
+
+</head>
+
+<body onload="main()">
+	<h1>Млечни зъби</h1>
+	<div class="page">
+		<h2> Кога започват да падат бебешките зъбки при децата? </h2>
+
+		<canvas width="498" height="398" style="border: solid 1px Black;">Искаме canvas, но няма!</canvas>
+		
+		<div style="position:relative; bottom:2.5em; left:-14em; text-align:center; width:598px;">
+			<button onclick="BLCI()">Долни Централни</button> </div>
+		<div style="position:relative; bottom:1.5em; left:-14em; text-align:center; width:598px;">
+			<button onclick="buttonUpperCentralIncisors()">Горни Централни</button> </div>
+		<div style="position:relative; bottom:0.5em; left:-14em; text-align:center; width:598px;">
+			<button onclick="buttonLowerLateralIncisors()">Долни крайни</button> </div>
+		<div style="position:relative; bottom:-1.5em; left:-14em; text-align:center; width:598px;">
+			<button onclick="buttonUpperLateralIncisors()">Горни крайни</button> </div>
+		<div style="position:relative; bottom:-2.5em; left:-14em; text-align:center; width:598px;">
+			<button onclick="buttonUpperFirstMolars()">Горни първи дъвкатели</button> </div>
+		<div style="position:relative; bottom:-3.5em; left:-14em; text-align:center; width:598px;">
+			<button onclick="buttonLowerFirstMolars()">Долни първи дъвкатели</button> </div>
+		<div style="position:relative; bottom:-4.5em; left:-14em; text-align:center; width:598px;">
+			<button onclick="buttonUpperCanines()">Горни кучешки</button> </div>
+		<div style="position:relative; bottom:-5.5em; left:-14em; text-align:center; width:598px;">
+			<button onclick="buttonLowerCanines()">Долни кучешки</button> </div>
+		<div style="position:relative; bottom:-6.5em; left:-14em; text-align:center; width:598px;">
+			<button onclick="buttonUpperSecondMolars()">Горни втори дъвкателни </button></div>
+		<div style="position:relative; bottom:-7.5em; left:-14em; text-align:center; width:598px;">
+			<button onclick="buttonLowerSecondMolars()">Долни втори дъвкателни</button> </div>
+		
+		
+		<div style="position:relative; bottom:15.5em; left:30em; text-align:center; width:598px;">
+			<button onclick="BFLCI()">Падащи долни централни </button> </div>
+		<div style="position:relative; bottom:14.5em; left:30em; text-align:center; width:598px;">
+			<button onclick="buttonFallingUCI()">Падащи горни централни </button> </div>
+		<div style="position:relative; bottom:13.5em; left:30em; text-align:center; width:598px;">
+			<button onclick="buttonFallingLLI()">Падащи долни крйни </button> </div>
+		<div style="position:relative; bottom:12.5em; left:30em; text-align:center; width:598px;">
+			<button onclick="buttonFallingULI()">Падащи горни крйни </button> </div>
+		<div style="position:relative; bottom:11.5em; left:30em; text-align:center; width:598px;">
+			<button onclick="buttonFallingUFM()">Падащи горни първи дъвкатели </button> </div>
+		<div style="position:relative; bottom:10.5em; left:30em; text-align:center; width:598px;">
+			<button onclick="buttonFallingLFM()">Падащи долни първи дъвкатели </button> </div>
+		<div style="position:relative; bottom:9.5em; left:30em; text-align:center; width:598px;">
+			<button onclick="buttonFallingUC()">Падащи горни кучешки </button> </div>
+		<div style="position:relative; bottom:8.5em; left:30em; text-align:center; width:598px;">
+			<button onclick="buttonFallingLC()">Падащи долни кучешки </button> </div>
+		<div style="position:relative; bottom:7.5em; left:30em; text-align:center; width:598px;">
+			<button onclick="buttonFallingUSM()">Падащи горни втори дъвкателни</button></div>
+		<div style="position:relative; bottom:6.5em; left:30em; text-align:center; width:598px;">
+			<button onclick="buttonFallingLSM()">Падащи долни втори дъвкателни</button> </div>
+		
+		<div class="text">
+			<p>Повечето родители имат редица въпроси относно зъбките на децата си, но един от най-често задаваните въпроси е: 
+			Кога се очаква смяната на бебешките зъби?</p>
+
+			<p>Обикновено всички деца започват да сменят млечните си зъбки с постоянни на една определена възраст, но вижте повече 
+			полезна информация за бебешките зъби в по-долните редове.</p>
+
+			<p>Как бебешките зъбки започват да падат? </p>
+
+			<p>Бебешките зъбки не са предназначени само за ядене, но и за да задържат пространството, нужно на постоянните зъби да израснат. 
+			Когато, така наречените „постоянни“ зъби започват да проправят своя път нагоре, те разтварят корена на млечните зъбки, които 
+			вече са израснали. С напредването на този процес на разлагане на корена, бебешките зъбки стават хлабави и така, без да е нужно 
+			вадене на зъб, детските зъбки започват да падат сами.</p>
+
+			<p>Малчуганът ви най-вероятно ще загуби първото си зъбче на възраст около 6-7 години. 
+			Всъщност, ниските централни резци обикновено са първите, които падат. Следват ги горните централни резци. 
+			Това може да засегне храненето при децата и съответно малчуганът да дъвче главно на задните си зъбки. Имайте предвид, 
+			че захапването на твърди плодове и храни, може да е затруднено, щом веднъж предните зъбки се разклатят или паднат. 
+			Затова е по-добре да наблегнете на меките и течни ястия в този период, вместо на твърдите плодове и зеленчуци, за да 
+			спестите на детенцето дискомфорта.</p>
+
+			<p>На възраст 7-8 години следва загубата на страничните резци, които са разположени между кучешките зъби и централните резци. 
+			Тук отново е момент, в който да не се фокусирате върху много твърди и дъвчащи хранителни продукти, които изискват дъвчене с 
+			предни зъби.</p>
+
+			<p>От 9 до 12 годишна възраст, при дребосъците следва разхлабване на долните и горни първи кътници. Детето трябва да се учи
+			да мие редовно и правилно зъбките си, особено в този период на смяна на млечните с постоянни зъби.</p>
+
+			<p>Последните зъбки, които се очакват да паднат са горните кучешки и първичните дъвкателни зъби (молари).</p>
+
+			<p>За да не се стига до вадене на зъб, още в детска възраст на вашия малчуган, стремете се да научите детето на добра 
+			хигиена и правилно четкане на зъбите. Разбира се, не пропускайте профилактичните посещения при зъболекаря, за да осигурите 
+			спокойствие за вас и здраве за детето ви. </p>
+			
+			<h3> https://www.medicaldent.bg/bg/blog/koga-zapochvat-da-padat-bebeshkite-zabki-pri-detsata </h3>
+			
+		</div>
+		
+		<img src = "Teeth.png" width = "500">
+		<p class = "fig">Млeчните зъби(Представени на 3D Paint) + наименования</p>
+		<div class = "animation">
+		
+			Кратко описание на функционалностите на анимацията: 
+		
+			
+			При натискане подред на бутоните около анимацията за сътветната двойка зъби се представя редя, в който падат млечните зъби на децата.
+			Бутоните от ляво представят лекото разклащане на зъбките. При натискане на бутоните от дясната страна те падат. След избиране на бутона за двойка зъбки следва да бъде натиснат бутон "Падащи.." за съответните зъбки.		
+			
+		</div>
+		<h4>Име: Анита Разпопова / ФН:62495</h4>
+	</div>
+</body>
